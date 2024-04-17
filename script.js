@@ -3,25 +3,37 @@ const input = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-button");
 const imageDiv = document.querySelector(".image");
 
-//CONFIG VARIABLES
-// const url = "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/";
-// "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/pikachu"
+const typesEl = document.querySelector("#types");
+const pokemonNameEl = document.querySelector("#pokemon-name");
+const pokemonIdEl = document.querySelector("#pokemon-id");
+const weightEl = document.querySelector("#weight");
+const heightEl = document.querySelector("#height");
+const hpEl = document.querySelector("#hp");
+const attackEl = document.querySelector("#attack");
+const defenseEl = document.querySelector("#defense");
+const specialAttackEl = document.querySelector("#special-attack");
+const specialDefenceEl = document.querySelector("#special-defence");
+const speedEl = document.querySelector("#speed");
 
-// State variables
+//CONFIG VARIABLES
+const apiUrl = "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/";
+
+// STATE VARIABLES
 let range;
 let pokemons;
-// when data not contains the input sarch alert with "Pokémon not found"
 
+// -------------------------------------------------
+// HELPER FUNCTIONS
 async function getjson(url) {
   let res = await fetch(url);
   let data = await res.json();
   return data;
 }
 
+//------------------------------------------------
+// iNITIALIZING FUNCTION
 async function init() {
-  let data = await getjson(
-    "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/"
-  );
+  let data = await getjson(apiUrl);
   range = data.count;
   pokemons = [...data.results];
 }
@@ -32,26 +44,38 @@ init();
 //   console.log(data);
 // }
 
-async function renderPokimon(pokemon) {
+async function renderPokemonData(pokemon) {
   let { id, name, url } = pokemon;
-  console.log(id, name, url);
 
+  // get inner data
   let pokemondata = await getjson(url);
   let { weight, height, types, sprites, stats } = pokemondata;
 
   // extracting data as array
-  stats = stats.map((stat) => [stat.stat.name, stat.base_stat]);
+  // stats = stats.map((stat) => [stat.stat.name, stat.base_stat]);
+  let statsObj = {};
+  for (let stat of stats) {
+    statsObj[stat.stat.name] = stat.base_stat;
+  }
   types = types.map((type) => type.type.name);
-  console.log(pokemondata);
-  console.log(`${id}
-  ${name}
-  ${weight}
-  ${height}
-`);
-  console.log(stats, types);
-  console.log(sprites);
 
+  // render data
   imageDiv.innerHTML = `<img id="sprite" src="${sprites.front_default}" alt="pokemon image">`;
+  console.log(statsObj);
+
+  pokemonNameEl.textContent = name;
+  pokemonIdEl.textContent = id;
+  weightEl.textContent = weight;
+  heightEl.textContent = height;
+  hpEl.textContent = statsObj.hp;
+  attackEl.textContent = statsObj.attack;
+  defenseEl.textContent = statsObj.defense;
+  specialDefenceEl.textContent = statsObj["special-defense"];
+  specialAttackEl.textContent = statsObj["special-attack"];
+  speedEl.textContent = statsObj.speed;
+  typesEl.innerHTML = types
+    .map((type) => `<span class="type">${type}</span>`)
+    .join("");
 }
 
 function handleSearch() {
@@ -76,11 +100,7 @@ function handleSearch() {
       return;
     }
   }
-
-  console.log(searchVal);
-  console.log(pokemon);
-
-  renderPokimon(pokemon);
+  renderPokemonData(pokemon);
 }
 
 // EVENTLISTENERS
