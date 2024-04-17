@@ -1,7 +1,7 @@
 // ELEMENTS
 const input = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-button");
-const imageDiv = document.querySelector(".image");
+const imageDiv = document.querySelector("#sprite-container");
 
 const typesEl = document.querySelector("#types");
 const pokemonNameEl = document.querySelector("#pokemon-name");
@@ -79,6 +79,25 @@ async function renderPokemonData(pokemon) {
     .join("");
 }
 
+// RESETTING UI
+const resetUi = () => {
+  const sprite = document.getElementById("sprite");
+  if (sprite) sprite.remove();
+
+  // RESET UI
+  typesEl.innerHTML = "";
+  nameEl.textContent = "";
+  idEl.textContent = "";
+  heightEl.textContent = "";
+  weightEl.textContent = "";
+  hpEl.textContent = "";
+  attackEl.textContent = "";
+  defenseEL.textContent = "";
+  specialAttackEl.textContent = "";
+  specialDefenseEL.textContent = "";
+  speedEl.textContent = "";
+};
+
 // ---------------------------------------
 // CORE LOGIC
 function handleSearch() {
@@ -100,6 +119,7 @@ function handleSearch() {
     pokemon = pokemons.find((pokemon) => pokemon.name === searchVal);
     if (!pokemon) {
       alert("Pokémon not found");
+      resetUi();
       return;
     }
   }
