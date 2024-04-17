@@ -12,11 +12,11 @@ const hpEl = document.querySelector("#hp");
 const attackEl = document.querySelector("#attack");
 const defenseEl = document.querySelector("#defense");
 const specialAttackEl = document.querySelector("#special-attack");
-const specialDefenceEl = document.querySelector("#special-defence");
+const specialDefenceEl = document.querySelector("#special-defense");
 const speedEl = document.querySelector("#speed");
 
 //CONFIG VARIABLES
-const apiUrl = "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon/";
+const apiUrl = "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon";
 
 // STATE VARIABLES
 let range;
@@ -25,25 +25,30 @@ let pokemons;
 // -------------------------------------------------
 // HELPER FUNCTIONS
 async function getjson(url) {
-  let res = await fetch(url);
-  let data = await res.json();
-  return data;
+  try {
+    let res = await fetch(url);
+    let data = await res.json();
+    return data;
+  } catch (error) {
+    alert("Pokémon not found");
+  }
 }
 
 //------------------------------------------------
 // iNITIALIZING FUNCTION
 async function init() {
-  let data = await getjson(apiUrl);
-  range = data.count;
-  pokemons = [...data.results];
+  try {
+    let data = await getjson(apiUrl);
+    range = data.count;
+    pokemons = [...data.results];
+  } catch (error) {
+    alert("Pokémon not found");
+  }
 }
 init();
 
-// async function getpokemon(pokemonUrl) {
-//   let data = await getjson(pokemonUrl);
-//   console.log(data);
-// }
-
+// ----------------------------------------------
+// DATA RENDERING
 async function renderPokemonData(pokemon) {
   let { id, name, url } = pokemon;
 
@@ -51,19 +56,15 @@ async function renderPokemonData(pokemon) {
   let pokemondata = await getjson(url);
   let { weight, height, types, sprites, stats } = pokemondata;
 
-  // extracting data as array
-  // stats = stats.map((stat) => [stat.stat.name, stat.base_stat]);
+  // destructuring data
   let statsObj = {};
-  for (let stat of stats) {
-    statsObj[stat.stat.name] = stat.base_stat;
-  }
+  for (let stat of stats) statsObj[stat.stat.name] = stat.base_stat;
   types = types.map((type) => type.type.name);
 
   // render data
   imageDiv.innerHTML = `<img id="sprite" src="${sprites.front_default}" alt="pokemon image">`;
   console.log(statsObj);
-
-  pokemonNameEl.textContent = name;
+  pokemonNameEl.textContent = name.toLowerCase();
   pokemonIdEl.textContent = id;
   weightEl.textContent = weight;
   heightEl.textContent = height;
@@ -78,6 +79,8 @@ async function renderPokemonData(pokemon) {
     .join("");
 }
 
+// ---------------------------------------
+// CORE LOGIC
 function handleSearch() {
   let searchVal = input.value;
   let pokemon;
