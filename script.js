@@ -21,6 +21,7 @@ const apiUrl = "https://pokeapi-proxy.freecodecamp.rocks/api/pokemon";
 // STATE VARIABLES
 let range;
 let pokemons;
+let intervalId;
 
 // -------------------------------------------------
 // HELPER FUNCTIONS
@@ -60,10 +61,26 @@ async function renderPokemonData(pokemon) {
   let statsObj = {};
   for (let stat of stats) statsObj[stat.stat.name] = stat.base_stat;
   types = types.map((type) => type.type.name);
+  console.log(sprites);
 
-  // render data
+  // periodically changing images
+  if (intervalId) clearInterval(intervalId);
+  let imagesArr = Object.values(sprites);
+  let currentFrame = 0;
+  function changeFrame() {
+    imageDiv.innerHTML = `<img id="sprite" src="${imagesArr[currentFrame]}" alt="pokemon image">`;
+    currentFrame++;
+    if (currentFrame >= imagesArr.length) currentFrame = 0;
+  }
+  //
   imageDiv.innerHTML = `<img id="sprite" src="${sprites.front_default}" alt="pokemon image">`;
-  console.log(statsObj);
+  intervalId = setInterval(changeFrame, 500);
+  setInterval(() => {
+    clearInterval(intervalId);
+    imageDiv.innerHTML = `<img id="sprite" src="${sprites.front_default}" alt="pokemon image">`;
+  }, 15000);
+
+  // other rendering
   pokemonNameEl.textContent = name.toLowerCase();
   pokemonIdEl.textContent = id;
   weightEl.textContent = weight;
@@ -81,10 +98,11 @@ async function renderPokemonData(pokemon) {
 
 // RESETTING UI
 const resetUi = () => {
-  const sprite = document.getElementById("sprite");
-  if (sprite) sprite.remove();
+  // const sprite = document.getElementById("sprite");
+  // if (sprite) sprite.remove();
 
   // RESET UI
+  imageDiv.innerHTML = `<img src="./assets/poke-ball.png" alt="" class="pokemon-ball" />`;
   typesEl.innerHTML = "";
   nameEl.textContent = "";
   idEl.textContent = "";

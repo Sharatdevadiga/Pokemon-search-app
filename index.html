@@ -3,40 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
     <title>Document</title>
   </head>
   <body>
-    <header>
+    <header class="header">
+      <img
+        src="./assets/pokemon logo.png"
+        width="50"
+        alt=""
+        class="brand-logo"
+      />
       <h1>Pokemon Search app</h1>
-      <div>
-        <input type="text" id="search-input" required />
-        <button id="search-button">Search</button>
-        <p>
-          Either enter pokemon id from 1 to 1302. Or just enter their name as
-          pikachu or metapod etc
-        </p>
-      </div>
     </header>
-
-    <main>
-      <div class="image" id="sprite-container"></div>
-      <div><span id="types"></span></div>
-      <div class="pokemon-characters">
-        <ul>
-          <li>Pokemon-name: <span id="pokemon-name"></span></li>
-          <li>Pokemon-id: <span id="pokemon-id"></span></li>
-          <li>Weight: <span id="weight"></span></li>
-          <li>Height: <span id="height"></span></li>
-          <li>HP: <span id="hp"></span></li>
-          <li>Attack: <span id="attack"></span></li>
-          <li>Defense: <span id="defense"></span></li>
-          <li>Special-attack: <span id="special-attack"></span></li>
-          <li>Special-defence: <span id="special-defense"></span></li>
-          <li>Speed: <span id="speed"></span></li>
-        </ul>
+    <div class="container">
+      <!-- <div class="container-inner"> -->
+      <div>
+        <input
+          type="text"
+          id="search-input"
+          class="search-input"
+          required
+          placeholder="name(pikachu) or id(1-1302)"
+        />
+        <button id="search-button">Search</button>
+        <p></p>
       </div>
-    </main>
+      <div class="image" id="sprite-container">
+        <img src="./assets/poke-ball.png" alt="" class="pokemon-ball" />
+      </div>
+      <div id="types"><span class="type">Special power</span></div>
+      <!-- </div> -->
+
+      <main>
+        <div class="pokemon-characters">
+          <table id="pokemon-table" class="pokemon-table">
+            <tr>
+              <td class="pokemon-label">Pokemon-name</td>
+              <td>
+                <span id="pokemon-name" class="pokemon-info">__________</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="pokemon-label">Pokemon-id</td>
+              <td>
+                <span id="pokemon-id" class="pokemon-info">__________</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="pokemon-label">Weight</td>
+              <td><span id="weight" class="pokemon-info">__________</span></td>
+            </tr>
+            <tr>
+              <td class="pokemon-label">Height</td>
+              <td><span id="height" class="pokemon-info">__________</span></td>
+            </tr>
+            <tr>
+              <td class="pokemon-label">HP</td>
+              <td><span id="hp" class="pokemon-info">__________</span></td>
+            </tr>
+            <tr>
+              <td class="pokemon-label">Attack</td>
+              <td><span id="attack" class="pokemon-info">__________</span></td>
+            </tr>
+            <tr>
+              <td class="pokemon-label">Defense</td>
+              <td><span id="defense" class="pokemon-info">__________</span></td>
+            </tr>
+            <tr>
+              <td class="pokemon-label">Special-attack</td>
+              <td>
+                <span id="special-attack" class="pokemon-info">__________</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="pokemon-label">Special-defense</td>
+              <td>
+                <span id="special-defense" class="pokemon-info"
+                  >__________</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td class="pokemon-label">Speed</td>
+              <td><span id="speed" class="pokemon-info">__________</span></td>
+            </tr>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <footer><p>&copy createb by: Sharath Devadiga</p></footer>
 
     <script src="./script.js"></script>
   </body>

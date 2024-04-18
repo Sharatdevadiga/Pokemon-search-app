@@ -1,0 +1,139 @@
+/* font */
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=VT323&display=swap");
+
+/* General styles */
+* {
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primary-tint2: #fef9c3;
+  --primary-tint1: #fde047;
+  --primary: #ffcc00;
+  --primary-shade1: #eab308;
+
+  --secondary-tint1: #0ea5e9;
+  --secondary: #0065b2;
+  --secondary-shade1: #075985;
+}
+body {
+  background: linear-gradient(
+      to right bottom,
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.85)
+    ),
+    url("./assets/Designer.png");
+  color: #fff;
+  background-size: cover;
+}
+button {
+  text-transform: uppercase;
+  background-color: var(--primary);
+  border: 3px solid var(--secondary);
+  padding: 2px 12px;
+}
+input,
+button,
+body {
+  font-family: "VT323", monospace;
+}
+
+/*................................. */
+.brand-logo {
+  height: 36px;
+  width: auto;
+  position: absolute;
+  left: 10px;
+}
+.header,
+footer {
+  position: relative;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  background: #00000046;
+  -webkit-backdrop-filter: blur(10px);
+  text-transform: uppercase;
+  color: var(--primary-shade1);
+}
+
+/* ........................ */
+.search-input {
+  background-color: var(--primary-tint2);
+  padding: 2px 4px;
+  min-width: 184px;
+}
+.search-input::placeholder {
+  color: #999;
+}
+.search-input:focus {
+  outline: 2px solid var(--secondary-tint1);
+}
+
+.container {
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0 auto;
+}
+/* .container-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+} */
+#sprite-container {
+  width: 184px;
+  height: 164px;
+  border: 4px solid var(--primary-shade1);
+  background-color: #88888846;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem;
+}
+.pokemon-ball {
+  width: 64px;
+}
+
+/* table styling */
+/* Style for the entire table */
+
+#pokemon-table {
+  border-collapse: collapse; /* Collapse borders between cells */
+  width: 300px;
+}
+
+/* Style for table rows */
+#pokemon-table tr {
+  border-bottom: 1px solid #dddddd24; /* Add a bottom border to separate rows */
+}
+
+/* Style for table cells */
+#pokemon-table td {
+  padding: 4px 8px 0 24px; /* Add padding to cells */
+  background: #88888846;
+  backdrop-filter: blur(5px);
+}
+.pokemon-label {
+  text-align: left;
+}
+
+/* Style for Pokemon info spans */
+.pokemon-info {
+  font-weight: bold;
+  color: var(--secondary-tint1); /* Change text color */
+  align-items: left;
+}
+
+.type {
+  padding: 4px 12px;
+  background-color: var(--secondary-tint1);
+  margin-right: 4px;
+}
