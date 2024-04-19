@@ -123,9 +123,14 @@ function handleSearch() {
   let pokemon;
 
   // invalid inputs
-  if (!searchVal) alert("Enter a valid id or name of the pokemon");
-  if (Number(searchVal) < 1 || Number(searchVal) > range)
-    alert(`Enret the id starting from 1 to ${range}`);
+  if (!searchVal) {
+    alert("Enter a valid id or name of the pokemon");
+    return;
+  }
+  if (Number(searchVal) < 1 || Number(searchVal) > range) {
+    alert(`Enter the id starting from 1 to ${range}`);
+    return;
+  }
 
   // if id was given as input
   if (Number(searchVal)) {
