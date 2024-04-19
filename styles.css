@@ -33,6 +33,17 @@ button {
   background-color: var(--primary);
   border: 3px solid var(--secondary);
   padding: 2px 12px;
+  width: 250px;
+  height: 36px;
+  transition: all 0.2s;
+  font-weight: bold;
+  font-size: 1rem;
+}
+button:hover {
+  transform: scale(1.03);
+}
+button:active {
+  transform: scale(1);
 }
 input,
 button,
@@ -47,24 +58,34 @@ body {
   position: absolute;
   left: 10px;
 }
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
 .header,
 footer {
-  position: relative;
   display: flex;
   gap: 1.2rem;
   justify-content: center;
   align-items: center;
-  background: #00000046;
+  background: #000000b9;
   -webkit-backdrop-filter: blur(10px);
   text-transform: uppercase;
   color: var(--primary-shade1);
+  font-size: 2rem;
 }
-
+footer {
+  font-size: 16px;
+}
 /* ........................ */
 .search-input {
   background-color: var(--primary-tint2);
   padding: 2px 4px;
-  min-width: 184px;
+  min-width: 250px;
+  height: 36px;
 }
 .search-input::placeholder {
   color: #999;
@@ -79,7 +100,8 @@ footer {
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
-  margin: 0 auto;
+  margin: 84px auto;
+  font-size: 24px;
 }
 /* .container-inner {
   display: flex;
@@ -107,7 +129,7 @@ footer {
 
 #pokemon-table {
   border-collapse: collapse; /* Collapse borders between cells */
-  width: 300px;
+  width: 500px;
 }
 
 /* Style for table rows */
@@ -136,4 +158,60 @@ footer {
   padding: 4px 12px;
   background-color: var(--secondary-tint1);
   margin-right: 4px;
+}
+
+@media (max-width: 650px) {
+  .header {
+    font-size: 20px;
+  }
+  button {
+    width: 86px;
+  }
+  #pokemon-table {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .brand-logo {
+    height: 20px;
+  }
+  .search-input {
+    min-width: 184px;
+  }
+  .header {
+    font-size: 16px;
+  }
+  .container {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 372px) {
+  .search-input {
+    min-width: 164px;
+  }
+  button {
+    width: 64px;
+  }
+  .header {
+    justify-content: end;
+    padding-right: 12px;
+  }
+}
+
+@media (max-width: 325px) {
+  .search-input {
+    min-width: 144px;
+  }
+  .container {
+    padding: 1.2rem 0;
+  }
+  button {
+    width: 64px;
+  }
+  .header {
+    justify-content: end;
+    padding-right: 12px;
+  }
 }
